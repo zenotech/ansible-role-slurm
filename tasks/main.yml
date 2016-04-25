@@ -1,0 +1,8 @@
+---
+# tasks file for slurm
+
+- include: packages.yml
+
+- include: slurmdbd_conf.yml
+
+- include: slurm_conf.yml

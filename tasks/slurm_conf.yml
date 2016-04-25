@@ -1,0 +1,8 @@
+- name: Install slurm config file
+  template: src=slurm.conf dest=/etc/slurm-llnl/slurm.conf owner=slurm
+#- name: Add cluster to accounting database
+#  command: sacctmgr add cluster {{slurm_clustername}} 
+- name: Start slurm master service
+  service: name=slurmctld state=started enabled=yes
+- name: Start slurm node service
+  service: name=slurmd state=started enabled=yes
