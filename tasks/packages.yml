@@ -1,9 +1,12 @@
 - name: debian | Install munge packages
   apt: name={{item}} state=installed
+  ignore_errors: true
   with_items:
     - munge
+- name: Create directories
+  file: name=/etc/systemd/system/munge.service.d state=directory
 - name: Fixup munge commandline parameters
-  copy: src=munge.service dest=/etc/systemd/system/munge.service.d/override.conf 
+  copy: src=munge.service dest=/etc/systemd/system/munge.service.d/override.conf
 - name: Restart systemd
   command: systemctl daemon-reload
 - name: Generate a new munge key
