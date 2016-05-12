@@ -10,6 +10,8 @@
 - name: Copy munge key
   copy: src=/zdata/munge.key dest=/etc/munge/munge.key owner=munge group=munge mode=0600 remote_src=true
   when: is_slurm_master != true
+  become: true
+  become_user: munge
 - name: Start munge service
   service: name=munge state=started enabled=yes
 - name: redhat | Install slurm packages
