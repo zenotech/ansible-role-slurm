@@ -12,6 +12,10 @@
 - name: Generate a new munge key
   command: create-munge-key -f
   run_once: true
+  when: is_slurm_master == true
+- name: Copy munge key
+  copy: src=/zdata/munge.key dest=/etc/munge/munge.key owner=munge group=munge mode=0600
+  when: is_slurm_master != true
 - name: Start munge service
   service: name=munge state=started enabled=yes
 - name: debian | Install slurm packages
@@ -25,3 +29,4 @@
   apt: name={{item}} state=installed
   with_items:
     - slurmdbd
+  when: is_slurm_master == true
