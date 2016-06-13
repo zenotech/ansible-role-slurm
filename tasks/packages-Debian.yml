@@ -14,7 +14,7 @@
   run_once: true
   when: is_slurm_master == true
 - name: Copy munge key
-  copy: src=/zdata/munge.key dest=/etc/munge/munge.key owner=munge group=munge mode=0600
+  copy: src=/zdata/munge.key dest=/etc/munge/munge.key owner=munge group=munge mode=0600 remote_src=true
   become: true
   become_user: munge
   when: is_slurm_master != true
