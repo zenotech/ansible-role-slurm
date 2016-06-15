@@ -5,6 +5,8 @@
 - name: Start slurm node service
   command: slurmd -N {{slurm_nodename}}
 #  service: name={{slurmd_service_name}} state=started enabled=yes
+- name: Restart munge
+  service: name=munge state=restarted
 
 - name: Inform master of our node
   command: scontrol update NodeName={{slurm_nodename}} NodeAddr={{ansible_eth0.ipv4.address}} NodeHostName={{ansible_fqdn}}
