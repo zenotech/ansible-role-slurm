@@ -13,3 +13,4 @@
 
 - name: Bring node into service
   command: scontrol update NodeName={{slurm_nodename}} state=RESUME
+  ignore_errors: true
